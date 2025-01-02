@@ -5,7 +5,6 @@
 
 import os, sys
 import ndef
-import hashlib
 from smartcard.CardMonitoring import CardMonitor, CardObserver
 from smartcard.util import toHexString
 from smartcard.CardConnection import CardConnection
