@@ -30,7 +30,7 @@
 
 ## Sense/Net as an executable
 
-A redistributable package with dependencies included is available, compiled with PyInstaller.
+A redistributable package with dependencies included is available, compiled with PyInstaller. It can be found on the `dist` directory.
 
 ---
 
