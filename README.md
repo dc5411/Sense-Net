@@ -1,6 +1,6 @@
 # Sense-NET
 
-**Sense-NET** is a tool to interact with bioimplants, specifically those manufactured by [Dangerous Things](https://dangerousthings.com/). It is designed to work with macOS systems and provides functionalities for both NFC and RFID modes, such as reading, writing, and retrieving implant information.
+**Sense-NET** is a tool to interact with bioimplants, specifically those manufactured by [Dangerous Things](https://dangerousthings.com/). It is designed to work with Unix systems and provides functionalities for both NFC and RFID modes, such as reading, writing, and retrieving implant information.
 
 ---
 
