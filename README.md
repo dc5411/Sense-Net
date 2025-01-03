@@ -18,7 +18,10 @@
 
 ## System Requirements
 
-- **Operating System**: macOS only.
+- **Operating System** 
+  - macOS.
+  - *BSD.
+  - Linux.
 - **Implant Compatibility**:
   - [NExT Implant](https://dangerousthings.com/product/next/).
   - [xSIID Implant](https://dangerousthings.com/product/xsiid/).
@@ -31,6 +34,12 @@
 ## Sense/Net as an executable
 
 A redistributable package with dependencies included is available, compiled with PyInstaller. It can be found on the `dist` directory.
+
+```bash
+cd dist/
+chmod +x sense-net
+./sense-net
+```
 
 ---
 
@@ -47,19 +56,29 @@ Ensure you have these dependencies installed. You can do so by running:
 
 ```bash
 pip install -r requirements.txt
+python3 sense-net.py
 ```
+
+Follow the prompts to interact with your bioimplant.
 
 ---
 
 ## Usage
 
-Connect your reader and run:
+Whether using the Python version or the redistributable one, and with either an RFID or NFC reader, Sense/Net can be run interactively or by directly invoking the desired option:
 
-  ```bash
-  python3 sense-net.py
-  ```
+```bash
+Sense-NET: A tool for interacting with bioimplants.
 
-Follow the prompts to interact with your bioimplant.
+options:
+  -h, --help                  show this help message and exit
+  --get-rfid-info             Get RFID implant information.
+  --get-nfc-info              Get NFC implant information.
+  --read-ndef                 Read NDEF contents from an NFC implant.
+  --read-raw                  Read raw blocks from an NFC implant.
+  --write-ndef MESSAGE        Write NDEF content to an NFC implant.
+
+```
 
 ---
 

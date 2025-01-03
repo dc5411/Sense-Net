@@ -3,7 +3,7 @@
 #Refer to the documentation for a list of compatible implants and devices
 #Dependencies: Requires Python3 and compatible hardware drivers
 
-import os, sys
+import os, sys, platform, argparse
 import ndef
 from smartcard.CardMonitoring import CardMonitor, CardObserver
 from smartcard.util import toHexString
@@ -11,12 +11,25 @@ from smartcard.CardConnection import CardConnection
 
 #Detect compatible readers and their available modes
 def detect_reader_mode():
-	output = os.popen("system_profiler SPUSBDataType 2>/dev/null").read()
-	if "Vendor ID: 0x08ff" in output and "Product ID: 0x0009" in output:
-		return "Dangerous Things RFID reader (Sycreader RFID Technology / AuthenTec).", "RFID"
-	elif "Vendor ID: 0x072f" in output and "Product ID: 0x223b" in output:
-		return "ACR1252 Dual Reader (ACS).", "NFC"
+	os_type = platform.system()
+	if os_type == "Darwin":
+		output = os.popen("system_profiler SPUSBDataType 2>/dev/null").read()
+		if "Vendor ID: 0x08ff" in output and "Product ID: 0x0009" in output:
+			return "Dangerous Things RFID reader (Sycreader RFID Technology / AuthenTec).", "RFID"
+		elif "Vendor ID: 0x072f" in output and "Product ID: 0x223b" in output:
+			return "ACR1252 Dual Reader (ACS).", "NFC"
+		else:
+			return None, None
+	elif os_type in ["Linux", "FreeBSD", "OpenBSD", "NetBSD"]:
+		output = os.popen("lsusb").read()
+		if "08ff:0009" in output:
+			return "Dangerous Things RFID reader (Sycreader RFID Technology / AuthenTec).", "RFID"
+		elif "072f:223b" in output:
+			return "ACR1252 Dual Reader (ACS).", "NFC"
+		else:
+			return None, None
 	else:
+		print("[!] Unsupported operating system.")
 		return None, None
 
 #RFID Mode
@@ -306,14 +319,48 @@ def start_nfc_listener(observer, new_ndef_message=None):
 		cardmonitor.deleteObserver(cardobserver)
 		print("[*] NFC listener stopped.")
 
-#Main
-reader, mode = detect_reader_mode()
-if reader:
-	print(f"[*] Reader: {reader}")
-	print(f"[*] Compatible mode: {mode}\n")
-	if mode == "RFID":
-		rfid_menu()
+#Arguments
+def process_arguments():
+	parser = argparse.ArgumentParser(description="Sense-NET: A tool for interacting with bioimplants.")
+	parser.add_argument("--get-rfid-info", action="store_true", help="Get RFID implant information.")
+	parser.add_argument("--get-nfc-info", action="store_true", help="Get NFC implant information.")
+	parser.add_argument("--read-ndef", action="store_true", help="Read NDEF contents from an NFC implant.")
+	parser.add_argument("--read-raw", action="store_true", help="Read raw blocks from an NFC implant.")
+	parser.add_argument("--write-ndef", type=str, help="Write NDEF content to an NFC implant.")
+	return parser.parse_args()
+
+#Read arguments
+def execute_action(args):
+	if args.get_rfid_info:
+		get_rfid_info()
+	elif args.get_nfc_info:
+		start_nfc_listener("info")
+	elif args.read_ndef:
+		start_nfc_listener("read")
+	elif args.read_raw:
+		start_nfc_listener("raw")
+	elif args.write_ndef:
+		start_nfc_listener("write", args.write_ndef)
 	else:
-		nfc_menu()
+		print("[!] No valid action provided.")
+
+#Main
+def main():
+	reader, mode = detect_reader_mode()
+	if reader:
+		print(f"[*] Reader: {reader}")
+		print(f"[*] Compatible mode: {mode}\n")
+		if mode == "RFID":
+			rfid_menu()
+		else:
+			nfc_menu()
+	else:
+		print("[!] No compatible devices found.")
+
+args = process_arguments()
+#Non-interactive
+if any(vars(args).values()):
+	execute_action(args)
+#Interactive
 else:
-	print("[!] No compatible devices found.")
+	main();
