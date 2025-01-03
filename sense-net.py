@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 #Sense-NET is a tool to interact with bioimplants (specially those manufactured by Dangerous Things)
 #Refer to the documentation for a list of compatible implants and devices
-#Dependencies: Requires Python3 and compatible hardware drivers
+#Mauro Eldritch @ BCA LTD - 2024
 
 import os, sys, platform, argparse
 import ndef
