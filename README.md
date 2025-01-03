@@ -50,6 +50,7 @@ The project requires Python 3 and the following Python libraries:
 ```
 ndef
 pyscard
+termcolor
 ```
 
 Ensure you have these dependencies installed. You can do so by running:
@@ -77,14 +78,31 @@ options:
   --read-ndef                 Read NDEF contents from an NFC implant.
   --read-raw                  Read raw blocks from an NFC implant.
   --write-ndef MESSAGE        Write NDEF content to an NFC implant.
+  --version                   Get Sense/Net version.
 
 ```
 
 ---
 
+## Screenshots
+
+### NFC Example
+<img src="img/A.png" alt="NFC Example" width="600">
+
+### Reading NDEF Data
+<img src="img/B.png" alt="NDEF Data" width="600">
+
+### Reading Raw Data
+<img src="img/C.png" alt="Raw Data" width="600">
+
+### RFID Example
+<img src="img/D.png" alt="RFID Example" width="600">
+
+---
+
 ## Credits
 
-This work is based on original contributions from [VladoPortos](https://github.com/VladoPortos) who actually wrote the only working library for ACR1252.
+This work is based on original contributions from [VladoPortos](https://github.com/VladoPortos) who actually wrote [the only working library for ACR1252](https://rpi4cluster.com/python-nfc-writer-reader/).
 
 ---
 
