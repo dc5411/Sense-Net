@@ -25,6 +25,12 @@
 - **Implant Compatibility**:
   - [NExT Implant](https://dangerousthings.com/product/next/).
   - [xSIID Implant](https://dangerousthings.com/product/xsiid/).
+  - [xHT Implant](https://dangerousthings.com/product/xht/).
+  - [xSLX Implant](https://dangerousthings.com/product/xslx/).
+  - [xNT Implant](https://dangerousthings.com/product/xnt/).
+  - [xEM Implant](https://dangerousthings.com/product/xem/).
+  - [xDF2 Implant](https://dangerousthings.com/product/xdf2/).
+  - [VivoKey Spark](https://dangerousthings.com/product/vivokey-spark/).
 - **Reader Compatibility**:
   - [Dangerous Things RFID Reader (Sycreader RFID Technology / AuthenTec)](https://dangerousthings.com/product/kbr1/).
   - [ACR1252 Dual Reader (ACS)](https://www.acs.com.hk/en/products/342/acr1252u-usb-nfc-reader-iii-nfc-forum-certified-reader/).
